@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -103,6 +102,16 @@ export default {
             transform: 'translateY(0)'
           },
         },
+        'slow-pop-up': {
+          '0%': {
+            opacity: '0',
+            transform: 'scale(0.95)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scale(1)'
+          },
+        },
         'glow': {
           '0%, 100%': { opacity: '0.5' },
           '50%': { opacity: '1' },
@@ -117,6 +126,7 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 1s ease-out forwards',
+        'slow-pop-up': 'slow-pop-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'glow': 'glow 2s ease-in-out infinite',
         'ink-flow': 'ink-flow 15s ease-in-out infinite',
 			}

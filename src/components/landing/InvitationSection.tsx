@@ -1,10 +1,23 @@
 
 import React from 'react';
 import Footer from './Footer';
+import { useInView } from 'react-intersection-observer';
+import { cn } from '@/lib/utils';
 
 const InvitationSection = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
   return (
-    <section className="scroll-section relative flex flex-col justify-center min-h-screen bg-brand-navy text-brand-beige p-8">
+    <section
+      ref={ref}
+      className={cn(
+        "scroll-section relative flex flex-col justify-center min-h-screen bg-brand-navy text-brand-beige p-8 opacity-0",
+        inView && "animate-slow-pop-up"
+      )}
+    >
       <div className="flex-grow flex items-center justify-center text-center">
         <div className="animate-fade-in-up">
           <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold">
