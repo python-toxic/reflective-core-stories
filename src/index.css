@@ -9,6 +9,11 @@
     --brand-navy: 245 73% 22%; /* #0F0860 */
     --brand-crimson: 342 100% 36%; /* #B50039 */
 
+    --ivory: 60 33% 96%; /* #FDFBF5 */
+    --champagne: 39 57% 90%; /* #F7E7CE */
+    --blush-gold: 30 50% 85%; /* #E8D5C4 */
+    --warm-gray: 30 10% 30%; /* #544F4C */
+
     --background: var(--brand-beige);
     --foreground: var(--brand-navy);
 

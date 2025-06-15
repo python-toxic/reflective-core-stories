@@ -53,7 +53,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
             asChild
             className="bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20"
           >
-            <Link to="/signup">Start Writing</Link>
+            <Link to="/journal">Start Writing</Link>
           </Button>
         </div>
 

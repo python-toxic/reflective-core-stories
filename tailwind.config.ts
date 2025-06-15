@@ -33,6 +33,10 @@ export default {
         'brand-beige': 'hsl(var(--brand-beige))',
         'brand-navy': 'hsl(var(--brand-navy))',
         'brand-crimson': 'hsl(var(--brand-crimson))',
+        'ivory': 'hsl(var(--ivory))',
+        'champagne': 'hsl(var(--champagne))',
+        'blush-gold': 'hsl(var(--blush-gold))',
+        'warm-gray': 'hsl(var(--warm-gray))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
