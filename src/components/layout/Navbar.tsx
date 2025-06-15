@@ -49,7 +49,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
           <a href="#" className={linkClasses}>Sign In</a>
           <Button
             variant={onDarkSection ? "outline" : "default"}
-            className={cn("nav-link-underline", {
+            className={cn({
               "text-brand-beige border-brand-beige/50 hover:bg-brand-beige hover:text-brand-navy": onDarkSection,
               "shadow-lg shadow-brand-navy/20": !onDarkSection
             })}
