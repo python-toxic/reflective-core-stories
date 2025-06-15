@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -48,11 +47,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
           <a href="#" className={linkClasses}>About</a>
           <a href="#" className={linkClasses}>Sign In</a>
           <Button
-            variant={onDarkSection ? "outline" : "default"}
-            className={cn({
-              "text-brand-beige border-brand-beige/50 hover:bg-brand-beige hover:text-brand-navy": onDarkSection,
-              "bg-brand-crimson hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20": !onDarkSection
-            })}
+            className="bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20"
           >
             Start Writing
           </Button>
