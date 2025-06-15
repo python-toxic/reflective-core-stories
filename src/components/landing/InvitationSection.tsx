@@ -1,15 +1,13 @@
 
 import React from 'react';
 import Footer from './Footer';
-import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
 
-const InvitationSection = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
+interface InvitationSectionProps {
+  inView: boolean;
+}
 
+const InvitationSection = React.forwardRef<HTMLElement, InvitationSectionProps>(({ inView }, ref) => {
   return (
     <section
       ref={ref}
@@ -36,6 +34,8 @@ const InvitationSection = () => {
       <Footer />
     </section>
   );
-};
+});
+
+InvitationSection.displayName = "InvitationSection";
 
 export default InvitationSection;
