@@ -30,7 +30,7 @@ const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
                 <Button variant="ghost" className="w-full text-lg nav-link-underline">Sign In</Button>
                </SheetClose>
                <SheetClose asChild>
-                <Button className="w-full text-lg bg-brand-navy text-brand-beige hover:bg-brand-navy/90">Start Writing</Button>
+                <Button className="w-full text-lg bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90">Start Writing</Button>
                </SheetClose>
             </div>
           </div>

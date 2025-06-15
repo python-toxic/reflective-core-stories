@@ -51,7 +51,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
             variant={onDarkSection ? "outline" : "default"}
             className={cn({
               "text-brand-beige border-brand-beige/50 hover:bg-brand-beige hover:text-brand-navy": onDarkSection,
-              "shadow-lg shadow-brand-navy/20": !onDarkSection
+              "bg-brand-crimson hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20": !onDarkSection
             })}
           >
             Start Writing
