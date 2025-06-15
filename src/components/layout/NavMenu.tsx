@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 
 const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
-  const navLinkClasses = "text-2xl font-sans hover:text-brand-crimson transition-colors";
+  const navLinkClasses = "text-2xl font-sans hover:text-brand-crimson transition-colors nav-link-underline";
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -27,10 +27,10 @@ const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
             </nav>
             <div className="flex flex-col items-center space-y-4">
                <SheetClose asChild>
-                <Button variant="ghost" className="w-full text-lg">Sign In</Button>
+                <Button variant="ghost" className="w-full text-lg nav-link-underline">Sign In</Button>
                </SheetClose>
                <SheetClose asChild>
-                <Button className="w-full text-lg bg-brand-navy text-brand-beige hover:bg-brand-navy/90">Start Writing</Button>
+                <Button className="w-full text-lg bg-brand-navy text-brand-beige hover:bg-brand-navy/90 nav-link-underline">Start Writing</Button>
                </SheetClose>
             </div>
           </div>

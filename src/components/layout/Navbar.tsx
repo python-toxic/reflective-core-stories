@@ -25,7 +25,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
   );
 
   const linkClasses = cn(
-    'font-sans text-sm transition-colors',
+    'font-sans text-sm transition-colors nav-link-underline',
     onDarkSection ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson',
   );
 
@@ -49,7 +49,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
           <a href="#" className={linkClasses}>Sign In</a>
           <Button
             variant={onDarkSection ? "outline" : "default"}
-            className={cn({
+            className={cn("nav-link-underline", {
               "text-brand-beige border-brand-beige/50 hover:bg-brand-beige hover:text-brand-navy": onDarkSection,
               "shadow-lg shadow-brand-navy/20": !onDarkSection
             })}

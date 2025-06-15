@@ -1,4 +1,6 @@
+
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 export default {
 	darkMode: ["class"],
@@ -132,5 +134,31 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+    require("tailwindcss-animate"),
+    plugin(function({ addUtilities }) {
+      addUtilities({
+        '.nav-link-underline': {
+          position: 'relative',
+          display: 'inline-block',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            left: '0',
+            bottom: '-4px',
+            width: '100%',
+            height: '1px',
+            backgroundColor: 'hsl(var(--brand-crimson))',
+            transform: 'scaleX(0)',
+            transformOrigin: 'right',
+            transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+          },
+          '&:hover::after': {
+            transform: 'scaleX(1)',
+            transformOrigin: 'left',
+          },
+        }
+      })
+    })
+  ],
 } satisfies Config;
