@@ -8,7 +8,7 @@ interface SleepInputProps {
 
 const SleepInput = ({ value, onChange }: SleepInputProps) => {
     return (
-        <div className="p-6 rounded-2xl bg-ivory/50 border-champagne/30 shadow-xl shadow-blush-gold/20 backdrop-blur-sm">
+        <div className="p-6 rounded-2xl bg-ivory/60 border border-champagne/40 shadow-lg shadow-blush-gold/25 backdrop-blur-md">
             <h3 className="text-lg font-serif text-warm-gray mb-4">Sleep</h3>
             <div className="relative mt-2">
                 <Input 
