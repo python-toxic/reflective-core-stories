@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
+import { Link } from "react-router-dom";
 
 const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
   const navLinkClasses = "text-2xl font-sans hover:text-brand-crimson transition-colors nav-link-underline";
@@ -27,7 +28,9 @@ const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
             </nav>
             <div className="flex flex-col items-center space-y-4">
                <SheetClose asChild>
-                <Button variant="ghost" className="w-full text-lg nav-link-underline">Sign In</Button>
+                <Button asChild variant="ghost" className="w-full text-lg nav-link-underline">
+                  <Link to="/login">Sign In</Link>
+                </Button>
                </SheetClose>
                <SheetClose asChild>
                 <Button className="w-full text-lg bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90">Start Writing</Button>
@@ -40,3 +43,4 @@ const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
 }
 
 export default NavMenu;
+

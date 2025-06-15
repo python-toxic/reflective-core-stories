@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import NavMenu from './NavMenu';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -45,7 +47,7 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
           <a href="#" className={linkClasses}>Features</a>
           <a href="#" className={linkClasses}>Pricing</a>
           <a href="#" className={linkClasses}>About</a>
-          <a href="#" className={linkClasses}>Sign In</a>
+          <Link to="/login" className={linkClasses}>Sign In</Link>
           <Button
             className="bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20"
           >
@@ -63,3 +65,4 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
 };
 
 export default Navbar;
+
