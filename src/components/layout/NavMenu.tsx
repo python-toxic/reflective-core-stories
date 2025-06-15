@@ -33,7 +33,9 @@ const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
                 </Button>
                </SheetClose>
                <SheetClose asChild>
-                <Button className="w-full text-lg bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90">Start Writing</Button>
+                <Button asChild className="w-full text-lg bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90">
+                  <Link to="/signup">Start Writing</Link>
+                </Button>
                </SheetClose>
             </div>
           </div>
@@ -43,4 +45,3 @@ const NavMenu = ({ onDarkSection }: { onDarkSection: boolean }) => {
 }
 
 export default NavMenu;
-

@@ -22,17 +22,18 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
   const navClasses = cn(
     'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out',
     scrolled ? 'bg-brand-beige/90 backdrop-blur-sm shadow-lg shadow-black/5' : 'bg-transparent',
-    onDarkSection && 'bg-brand-navy/10 backdrop-blur-sm shadow-none',
+    onDarkSection && !scrolled ? 'bg-transparent shadow-none' : '',
+    onDarkSection && scrolled ? 'bg-brand-navy/10 backdrop-blur-sm' : ''
   );
 
   const linkClasses = cn(
     'font-sans text-sm transition-colors nav-link-underline',
-    onDarkSection ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson',
+    onDarkSection && !scrolled ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson',
   );
 
   const logoClasses = cn(
     'font-serif text-xl font-bold transition-colors',
-     onDarkSection ? 'text-brand-beige' : 'text-brand-navy',
+     onDarkSection && !scrolled ? 'text-brand-beige' : 'text-brand-navy',
   );
 
   return (
@@ -49,9 +50,10 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
           <a href="#" className={linkClasses}>About</a>
           <Link to="/login" className={linkClasses}>Sign In</Link>
           <Button
+            asChild
             className="bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20"
           >
-            Start Writing
+            <Link to="/signup">Start Writing</Link>
           </Button>
         </div>
 
@@ -65,4 +67,3 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
 };
 
 export default Navbar;
-
