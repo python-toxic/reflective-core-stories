@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Canela:wght@300;400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,6 +62,8 @@
     @apply bg-background text-foreground font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
   }
 
   .scroll-container {
@@ -72,6 +75,32 @@
   .scroll-section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
+  }
+
+  /* Paper texture for text area */
+  .paper-texture {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
+  /* Custom cursor for text area */
+  .custom-cursor {
+    caret-color: transparent;
+  }
+
+  .custom-cursor::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 1.2em;
+    background: hsl(var(--warm-gray));
+    animation: soft-blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes soft-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
   }
 }
 

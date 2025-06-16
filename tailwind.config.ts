@@ -23,6 +23,7 @@ export default {
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],
         sans: ['Inter', 'sans-serif'],
+        canela: ['Canela', 'serif'],
       },
 			colors: {
 				border: 'hsl(var(--border))',
@@ -108,6 +109,16 @@ export default {
             transform: 'translateY(0)'
           },
         },
+        'stagger-fade-in': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(30px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)'
+          },
+        },
         'slow-pop-up': {
           '0%': {
             opacity: '0',
@@ -126,15 +137,37 @@ export default {
           '0%': { transform: 'scale(1) rotate(0deg)', opacity: 0.1 },
           '50%': { transform: 'scale(1.1) rotate(5deg)', opacity: 0.15 },
           '100%': { transform: 'scale(1) rotate(0deg)', opacity: 0.1 },
+        },
+        'gentle-bounce': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
+        },
+        'lift': {
+          '0%': { transform: 'translateY(0px)' },
+          '100%': { transform: 'translateY(-2px)' },
+        },
+        'press-down': {
+          '0%': { transform: 'translateY(0px) scale(1)' },
+          '100%': { transform: 'translateY(1px) scale(0.98)' },
+        },
+        'checkmark': {
+          '0%': { transform: 'scale(0) rotate(-45deg)' },
+          '50%': { transform: 'scale(1.1) rotate(-45deg)' },
+          '100%': { transform: 'scale(1) rotate(-45deg)' },
         }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in-up': 'fade-in-up 1s ease-out forwards',
+        'stagger-fade-in': 'stagger-fade-in 0.8s ease-out forwards',
         'slow-pop-up': 'slow-pop-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'glow': 'glow 2s ease-in-out infinite',
         'ink-flow': 'ink-flow 15s ease-in-out infinite',
+        'gentle-bounce': 'gentle-bounce 0.6s ease-in-out',
+        'lift': 'lift 0.2s ease-out forwards',
+        'press-down': 'press-down 0.1s ease-in-out',
+        'checkmark': 'checkmark 0.4s ease-out forwards',
 			}
 		}
 	},
