@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -13,9 +14,9 @@ const HeroSection = () => {
           Where daily reflections meet profound insights.
         </p>
         <div className="mt-12" style={{ animation: `fade-in-up 1s ease-out 1s forwards`, opacity: 0 }}>
-          <a href="#" className="font-sans text-lg cta-underline pb-1 tracking-wider">
+          <Link to="/login" className="font-sans text-lg cta-underline pb-1 tracking-wider">
             Start Writing Now
-          </a>
+          </Link>
         </div>
       </div>
     </section>

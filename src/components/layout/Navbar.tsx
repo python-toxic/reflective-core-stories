@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import NavMenu from './NavMenu';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
@@ -26,40 +25,35 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
     onDarkSection && scrolled ? 'bg-brand-navy/10 backdrop-blur-sm' : ''
   );
 
-  const linkClasses = cn(
-    'font-sans text-sm transition-colors nav-link-underline',
-    onDarkSection && !scrolled ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson',
-  );
-
   const logoClasses = cn(
     'font-serif text-xl font-bold transition-colors',
      onDarkSection && !scrolled ? 'text-brand-beige' : 'text-brand-navy',
   );
 
+  const linkClasses = cn(
+    'font-sans text-sm transition-colors',
+    onDarkSection && !scrolled ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson',
+  );
+
   return (
     <header className={navClasses}>
-      <nav className="container mx-auto flex items-center justify-between p-4">
-        <a href="#" className={logoClasses}>
-          Reflective Core
-        </a>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="#" className={linkClasses}>Features</a>
-          <a href="#" className={linkClasses}>Pricing</a>
-          <a href="#" className={linkClasses}>About</a>
-          <Link to="/login" className={linkClasses}>Sign In</Link>
-          <Button
-            asChild
-            className="bg-brand-crimson text-brand-beige hover:bg-brand-crimson/90 shadow-lg shadow-brand-crimson/20"
-          >
-            <Link to="/journal">Start Writing</Link>
-          </Button>
-        </div>
-
-        {/* Mobile Nav */}
-        <div className="md:hidden">
-          <NavMenu onDarkSection={onDarkSection} />
+      <nav className="container mx-auto flex items-center justify-center p-4 h-16 relative">
+        <div className="flex items-center space-x-3">
+          <span className={logoClasses}>
+            Reflective Core
+          </span>
+          <span className={cn(
+            "italic text-lg font-light transition-colors",
+            onDarkSection && !scrolled ? 'text-brand-beige/60' : 'text-brand-navy/60'
+          )}>/</span>
+          <Link to="/login">
+            <Button variant="ghost" className={cn(
+              "transition-colors",
+              onDarkSection && !scrolled ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson'
+            )}>
+              Sign In
+            </Button>
+          </Link>
         </div>
       </nav>
     </header>
