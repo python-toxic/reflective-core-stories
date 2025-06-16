@@ -30,11 +30,6 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
      onDarkSection && !scrolled ? 'text-brand-beige' : 'text-brand-navy',
   );
 
-  const linkClasses = cn(
-    'font-sans text-sm transition-colors',
-    onDarkSection && !scrolled ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson',
-  );
-
   return (
     <header className={navClasses}>
       <nav className="container mx-auto flex items-center justify-center p-4 h-16 relative">
@@ -48,8 +43,10 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
           )}>/</span>
           <Link to="/login">
             <Button variant="ghost" className={cn(
-              "transition-colors",
-              onDarkSection && !scrolled ? 'text-brand-beige hover:text-brand-beige/80' : 'text-brand-navy hover:text-brand-crimson'
+              "transition-all duration-200 hover:bg-transparent",
+              onDarkSection && !scrolled 
+                ? 'text-brand-beige hover:text-brand-beige/70 hover:bg-brand-beige/10' 
+                : 'text-brand-navy hover:text-warm-gray hover:bg-warm-gray/10'
             )}>
               Sign In
             </Button>
