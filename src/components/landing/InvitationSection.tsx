@@ -2,6 +2,7 @@
 import React from 'react';
 import Footer from './Footer';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 interface InvitationSectionProps {
   inView: boolean;
@@ -25,9 +26,9 @@ const InvitationSection = React.forwardRef<HTMLElement, InvitationSectionProps>(
             It starts with one entry.
           </p>
           <div className="mt-12" style={{ animation: `fade-in-up 1s ease-out 1s forwards`, opacity: 0 }}>
-            <a href="#" className="font-sans text-lg cta-underline pb-1 tracking-wider">
+            <Link to="/login" className="font-sans text-lg cta-underline pb-1 tracking-wider">
               Start Writing Now
-            </a>
+            </Link>
           </div>
         </div>
       </div>
