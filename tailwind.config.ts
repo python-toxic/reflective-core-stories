@@ -23,6 +23,7 @@ export default {
       fontFamily: {
         serif: ['"Playfair Display"', 'serif'],
         sans: ['Inter', 'sans-serif'],
+        canela: ['Canela', 'serif'],
       },
 			colors: {
 				border: 'hsl(var(--border))',

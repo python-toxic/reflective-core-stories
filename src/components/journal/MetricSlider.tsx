@@ -14,8 +14,8 @@ const MetricSlider = ({ label, value, onValueChange, min, max, step }: MetricSli
     return (
         <div className="p-6 rounded-2xl bg-ivory/60 border border-champagne/40 shadow-lg shadow-blush-gold/25 backdrop-blur-md">
             <div className="flex justify-between items-baseline mb-4">
-                <h3 className="text-lg font-serif text-warm-gray">{label}</h3>
-                <span className="font-sans text-2xl text-warm-gray/80 font-bold">{value[0]}</span>
+                <h3 className="text-lg font-canela font-bold text-warm-gray">{label}</h3>
+                <span className="font-canela text-2xl text-warm-gray/80 font-bold">{value[0]}</span>
             </div>
             <Slider
                 value={value}
