@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { User } from "lucide-react";
@@ -9,25 +8,27 @@ const JournalNavbar = () => {
             <nav className="container mx-auto flex items-center justify-between p-4 h-16">
                 {/* Left side - Logo */}
                 <div className="flex items-center">
-                    <span className="font-canela text-xl font-bold text-warm-gray">
-                        Reflective Core
-                    </span>
+                    <Link to="/">
+                        <span className="font-canela text-2xl font-extrabold text-brand-navy tracking-tight select-none">
+                            Reflective Core
+                        </span>
+                    </Link>
                 </div>
 
                 {/* Center - Navigation Links */}
                 <div className="flex items-center space-x-8">
                     <Link to="/journal" className="nav-link-underline">
-                        <span className="font-canela text-lg font-bold text-warm-gray hover:text-brand-crimson transition-colors">
+                        <span className="font-canela text-lg font-bold text-brand-navy hover:text-brand-crimson transition-colors">
                             Journal
                         </span>
                     </Link>
                     <Link to="/companion" className="nav-link-underline">
-                        <span className="font-canela text-lg font-bold text-warm-gray hover:text-brand-crimson transition-colors">
+                        <span className="font-canela text-lg font-bold text-brand-navy hover:text-brand-crimson transition-colors">
                             Companion
                         </span>
                     </Link>
                     <Link to="/reflect" className="nav-link-underline">
-                        <span className="font-canela text-lg font-bold text-warm-gray hover:text-brand-crimson transition-colors">
+                        <span className="font-canela text-lg font-bold text-brand-navy hover:text-brand-crimson transition-colors">
                             Reflect
                         </span>
                     </Link>

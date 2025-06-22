@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const AISection = () => {
@@ -6,8 +5,14 @@ const AISection = () => {
     <section className="scroll-section flex items-center justify-center min-h-screen bg-brand-beige text-brand-navy p-8 md:p-16">
        <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="animate-fade-in-up order-2 md:order-1">
-          <h2 className="font-serif text-4xl md:text-6xl font-bold">Let AI Help You See the Unseen</h2>
-          <p className="font-sans text-lg md:text-xl mt-6 max-w-md">
+          <h2 className="font-serif text-4xl md:text-6xl font-bold"
+          style={{ 
+            color: "hsl(var(--brand-crimson-dark))",
+            textShadow: "0 4px 12px rgba(0,0,0,0.25)"
+          }}>
+            Let AI Help You See the Unseen</h2>
+          <p className="font-sans text-lg md:text-xl mt-6 max-w-md" 
+          >
             Patterns in your reflections gently emerge, revealing emotional trends you may never notice.
           </p>
         </div>

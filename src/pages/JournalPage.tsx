@@ -55,11 +55,16 @@ const JournalPage = () => {
                         <SleepInput value={sleep} onChange={(e) => setSleep(e.target.value)} />
                         
                         <Button 
-                            onClick={handleSave}
-                            className="w-full text-lg font-canela font-bold bg-brand-navy text-ivory hover:bg-brand-navy/90 transition-all duration-300 shadow-xl shadow-blush-gold/30 !mt-12 h-14"
-                        >
-                            Save Entry
-                        </Button>
+                          onClick={handleSave}
+                          className="w-full text-lg font-canela font-bold bg-brand-navy text-ivory 
+                              hover:bg-brand-navy/90 
+                              transition-shadow duration-300 ease-out 
+                              shadow-[0_12px_32px_rgba(0,0,0,0.35)] 
+                              hover:shadow-[0_16px_40px_rgba(0,0,0,0.5)] 
+                              focus-visible:shadow-[0_0_0_3px_rgba(255,215,160,0.5)] 
+                              !mt-12 h-14 rounded-2xl">
+                              Save Entry
+                      </Button>
                     </div>
                 </div>
             </main>

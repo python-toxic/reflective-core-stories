@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const PromiseSection = () => {
@@ -6,7 +5,11 @@ const PromiseSection = () => {
     <section className="scroll-section flex items-center justify-center min-h-screen bg-brand-beige text-brand-navy p-8 md:p-16">
       <div className="container mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="animate-fade-in-up">
-          <h2 className="font-serif text-4xl md:text-6xl font-bold">From Thoughts to Clarity</h2>
+          <h2 className="font-serif text-4xl md:text-6xl font-bold"
+          style={{ 
+            color: "hsl(var(--brand-crimson-dark))",
+            textShadow: "0 4px 12px rgba(0,0,0,0.25)"
+          }}>From Thoughts to Clarity</h2>
           <p className="font-sans text-lg md:text-xl mt-6 max-w-md">
             Reflective Core helps you transform fleeting feelings into lasting understanding.
           </p>

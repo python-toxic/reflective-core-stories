@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +9,9 @@ import SignUpPage from "./pages/SignUpPage";
 import JournalPage from "./pages/JournalPage";
 import NotFound from "./pages/NotFound";
 import { ThemeProvider } from "next-themes";
+import CompanionPage from "./pages/CompanionPage";
+import ReflectPage from "./pages/ReflectPage"; 
+
 
 const queryClient = new QueryClient();
 
@@ -23,9 +25,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/reflect" element={<ReflectPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/journal" element={<JournalPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/companion" element={<CompanionPage />} />
+            
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';  
 
 const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -26,29 +25,43 @@ const Navbar = ({ onDarkSection }: { onDarkSection: boolean }) => {
   );
 
   const logoClasses = cn(
-    'font-serif text-xl font-bold transition-colors',
-     onDarkSection && !scrolled ? 'text-brand-beige' : 'text-brand-navy',
+    'font-serif text-2xl font-bold transition-colors', // Increased text size from text-xl to text-2xl
+    onDarkSection && !scrolled ? 'text-brand-beige' : 'text-brand-navy',
   );
 
   return (
     <header className={navClasses}>
       <nav className="container mx-auto flex items-center justify-center p-4 h-16 relative">
-        <div className="flex items-center space-x-3">
-          <span className={logoClasses}>
+        {/* Adjusted space-x to bring elements closer initially */}
+        <div className="flex items-center space-x-0.3"> {/* Changed from space-x-3 to space-x-1 */}
+          {/* Reflective Core with Glass Morphism (static size) */}
+          <div
+            className={cn(
+              logoClasses,
+              "relative group px-2 py-1 rounded-lg cursor-pointer overflow-hidden"
+            )}
+          >
             Reflective Core
-          </span>
+          </div>
+
           <span className={cn(
-            "italic text-lg font-light transition-colors",
+            "italic text-xl font-light transition-colors", // Increased text size from text-lg to text-xl
             onDarkSection && !scrolled ? 'text-brand-beige/60' : 'text-brand-navy/60'
           )}>/</span>
+
+          {/* Sign In button with Glass Morphism (expanding) */}
           <Link to="/login">
-            <Button variant="ghost" className={cn(
-              "transition-all duration-200 hover:bg-transparent",
-              onDarkSection && !scrolled 
-                ? 'text-brand-beige hover:text-brand-beige/70 hover:bg-brand-beige/10' 
-                : 'text-brand-navy hover:text-warm-gray hover:bg-warm-gray/10'
-            )}>
-              Sign In
+            <Button
+              variant="ghost"
+              className={cn(
+                "bg-transparent hover:bg-transparent px-1 py-1 ml-3 shadow-none",
+                "font-canela font-bold transition-colors text-lg", // Increased text size for button
+                onDarkSection && !scrolled
+                  ? "text-brand-beige hover:text-brand-beige"
+                  : "text-brand-navy hover:text-brand-crimson"
+              )}
+            >
+              <span className="relative z-10 cta-underline pb-0.7 tracking-wider">Sign In</span>
             </Button>
           </Link>
         </div>
