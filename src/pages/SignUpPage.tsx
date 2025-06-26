@@ -1,4 +1,3 @@
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required." }),
@@ -29,6 +30,8 @@ const formSchema = z.object({
 });
 
 const SignUpPage = () => {
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,9 +42,23 @@ const SignUpPage = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Signup attempt with:", values);
-    // Here you would typically handle the registration logic
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setError('');
+    setLoading(true);
+    try {
+      const res = await axios.post('/api/auth/signup', {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+      });
+      // Optionally, auto-login after signup
+      // localStorage.setItem('token', res.data.token);
+      window.location.href = '/login';
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Signup failed.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -59,6 +76,7 @@ const SignUpPage = () => {
         </div>
 
         <div className="p-8 backdrop-blur-sm bg-brand-beige/20 rounded-lg shadow-2xl shadow-black/5">
+          {error && <div className="mb-4 text-red-600 text-center font-medium">{error}</div>}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -135,8 +153,9 @@ const SignUpPage = () => {
                 type="submit"
                 variant="ghost"
                 className="w-full !mt-10 text-brand-navy border border-brand-navy/30 hover:bg-brand-navy hover:text-brand-beige transition-all duration-300"
+                disabled={loading}
               >
-                Sign Up
+                {loading ? 'Signing Up...' : 'Sign Up'}
               </Button>
             </form>
           </Form>

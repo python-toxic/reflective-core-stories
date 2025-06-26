@@ -5,6 +5,7 @@ import ChatArea from '@/components/companion/ChatArea';
 import ChatInput from '@/components/companion/ChatInput';
 import PromptSuggestions from '@/components/companion/PromptSuggestions';
 import inwardAlways from '@/components/layout/inward-always.png';
+import axios from 'axios';
 
 type Message = {
   from: 'ai' | 'user';
@@ -18,18 +19,29 @@ const AICompanion = () => {
     ]
   );
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
-    setMessages([...messages, { from: 'user', text: input }]);
+    const userMessage: Message = { from: 'user', text: input };
+    setMessages((prev: Message[]) => [...prev, userMessage]);
     setInput('');
-    // Simulate AI response
-    setTimeout(() => {
-      setMessages((msgs) => [
-        ...msgs,
-        { from: 'ai', text: "I'm here for you. Let's talk more about that." },
-      ]);
-    }, 800);
+    setLoading(true);
+    try {
+      // Build message history for LLM
+      const history = [
+        { role: 'system', content: 'You are a compassionate AI counselor. Respond with empathy and support.' },
+        ...messages.map((m) => ({ role: m.from === 'user' ? 'user' : 'assistant', content: m.text })),
+        { role: 'user', content: input },
+      ];
+      const res = await axios.post('/api/ai/chat', { messages: history });
+      const aiText = res.data.message?.content || res.data.message || 'Sorry, I could not respond.';
+      setMessages((prev: Message[]) => [...prev, { from: 'ai', text: aiText }]);
+    } catch (err) {
+      setMessages((prev: Message[]) => [...prev, { from: 'ai', text: 'Sorry, there was an error connecting to the AI.' }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const prompts = [
@@ -40,7 +52,7 @@ const AICompanion = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-brand-beige">
       <JournalNavbar />
       <div className="flex-1 flex items-center justify-center px-4 sm:px-10 lg:px-32 pt-20">
         <div className="flex items-center justify-center gap-12 animate-fade-in-up">
@@ -73,6 +85,7 @@ const AICompanion = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onSend={handleSend}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                  disabled={loading}
                 />
               </div>
             </CardContent>

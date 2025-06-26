@@ -18,27 +18,21 @@ interface EmotionTagsProps {
 
 const EmotionTags = ({ value, onValueChange }: EmotionTagsProps) => {
   return (
-    <div className="p-6 rounded-2xl bg-ivory/60 border border-champagne/40 
-        shadow-[0_12px_32px_rgba(0,0,0,0.35)] 
-        hover:shadow-[0_16px_40px_rgba(0,0,0,0.5)] 
-        focus-within:shadow-[0_0_0_3px_rgba(255,215,160,0.5)]
-        backdrop-blur-md transition-shadow duration-300 ease-out">
-        
-      <h3 className="text-lg font-canela font-bold text-warm-gray mb-4">Emotion Tag</h3>
-
+    <div className="glass-card p-7 rounded-3xl bg-white/60 border border-champagne/30 shadow-xl backdrop-blur-md">
+      <h3 className="text-lg font-canela font-semibold text-warm-gray mb-4">Emotion Tag</h3>
       <Select value={value} onValueChange={onValueChange}>
         <SelectTrigger className="w-full bg-transparent border-0 border-b-2 border-champagne/50 
-          focus:ring-0 focus:border-blush-gold text-warm-gray/80 
-          placeholder:text-warm-gray/40">
-          <SelectValue placeholder="Select an emotion..." />
+          focus:ring-0 focus:border-blush-gold 
+          text-warm-gray/80 placeholder:text-warm-gray/40 
+          px-2 py-3 text-base rounded-md transition-all duration-200">
+          <SelectValue placeholder="Select your emotion..." />
         </SelectTrigger>
-
-        <SelectContent className="bg-ivory/95 backdrop-blur-sm border border-champagne/50">
+        <SelectContent className="bg-ivory/95 backdrop-blur-sm border border-champagne/50 shadow-md rounded-xl">
           {emotions.map(emotion => (
             <SelectItem
               key={emotion}
               value={emotion.toLowerCase()}
-              className="focus:bg-champagne/50 cursor-pointer"
+              className="focus:bg-champagne/30 focus:text-warm-gray font-medium rounded-lg px-3 py-2 transition-all cursor-pointer"
             >
               {emotion}
             </SelectItem>

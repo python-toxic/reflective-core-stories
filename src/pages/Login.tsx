@@ -1,4 +1,3 @@
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -24,6 +25,8 @@ const formSchema = z.object({
 });
 
 const LoginPage = () => {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,10 +35,20 @@ const LoginPage = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Login attempt with:", values);
-    // Here you would typically handle the authentication logic,
-    // like sending the credentials to your backend.
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setError("");
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/auth/login", values);
+      // Save JWT to localStorage (or cookie for better security)
+      localStorage.setItem("token", res.data.token);
+      // Optionally, redirect to dashboard or home
+      window.location.href = "/journal";
+    } catch (err) {
+      setError(err?.response?.data?.message || "Login failed.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -49,10 +62,15 @@ const LoginPage = () => {
       <div className="relative z-10 w-full max-w-md p-8 space-y-8 animate-fade-in-up">
         <div className="text-center">
           <h1 className="text-4xl font-serif text-brand-navy">Welcome Back</h1>
-          <p className="mt-2 text-brand-navy/80">Enter your credentials to access your journal.</p>
+          <p className="mt-2 text-brand-navy/80">
+            Enter your credentials to access your journal.
+          </p>
         </div>
 
         <div className="p-8 backdrop-blur-sm bg-brand-beige/20 rounded-lg shadow-2xl shadow-black/5">
+          {error && (
+            <div className="mb-4 text-red-600 text-center font-medium">{error}</div>
+          )}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
@@ -60,7 +78,9 @@ const LoginPage = () => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-brand-navy/80">Email Address</FormLabel>
+                    <FormLabel className="text-brand-navy/80">
+                      Email Address
+                    </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="you@example.com"
@@ -94,8 +114,9 @@ const LoginPage = () => {
                 type="submit"
                 variant="ghost"
                 className="w-full !mt-12 text-brand-navy border border-brand-navy/30 hover:bg-brand-navy hover:text-brand-beige transition-all duration-300"
+                disabled={loading}
               >
-                Sign In
+                {loading ? "Signing In..." : "Sign In"}
               </Button>
             </form>
           </Form>
@@ -103,7 +124,10 @@ const LoginPage = () => {
 
         <div className="flex items-center justify-between text-sm text-brand-navy/80 pt-4 border-t border-brand-navy/10">
           <p>New here?</p>
-          <Link to="/signup" className="font-medium text-brand-crimson cta-underline">
+          <Link
+            to="/signup"
+            className="font-medium text-brand-crimson cta-underline"
+          >
             Create an account
           </Link>
         </div>
