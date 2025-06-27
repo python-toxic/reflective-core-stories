@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import JournalInput from '@/components/journal/JournalInput';
-// REMOVED: import MoodRating from '@/components/journal/MoodRating'; // No longer needed
-import KeyInsightInput from '@/components/journal/KeyInsightInput'; // NEW: Import the new component
+import KeyInsightInput from '@/components/journal/KeyInsightInput';
 import MetricSlider from '@/components/journal/MetricSlider';
 import SleepInput from '@/components/journal/SleepInput';
 import { Button } from '@/components/ui/button';
@@ -9,11 +8,11 @@ import JournalNavbar from '@/components/layout/JournalNavbar';
 import EmotionTags from '@/components/journal/EmotionTags';
 import axios from "axios";
 import PastEntries from '@/components/journal/PastEntries';
+import { History } from 'lucide-react';
 
 const JournalPage = () => {
     const [journalText, setJournalText] = useState("");
-    // REMOVED: const [mood, setMood] = useState("neutral"); // Mood state removed
-    const [keyInsight, setKeyInsight] = useState(""); // NEW: Key Insight state
+    const [keyInsight, setKeyInsight] = useState("");
     const [energy, setEnergy] = useState([5]);
     const [emotionTag, setEmotionTag] = useState("grateful");
     const [sleep, setSleep] = useState("7.5");
@@ -22,7 +21,7 @@ const JournalPage = () => {
     const [loadingEntries, setLoadingEntries] = useState(false);
     const [editStates, setEditStates] = useState<{ [id: string]: boolean }>({});
     const [error, setError] = useState<string | null>(null);
-    const [keyInsightLoading, setKeyInsightLoading] = useState(false); // NEW: loading state for summarize
+    const [keyInsightLoading, setKeyInsightLoading] = useState(false);
 
     // Fetch entries from backend when modal opens
     useEffect(() => {
@@ -34,8 +33,12 @@ const JournalPage = () => {
                     const res = await axios.get("/api/journal/all", {
                         headers: { Authorization: `Bearer ${token}` }
                     });
-                    setEntries(res.data.entries || []);
+                    const sortedEntries = res.data.entries.sort((a: any, b: any) =>
+                        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                    );
+                    setEntries(sortedEntries || []);
                 } catch (err) {
+                    console.error("Failed to fetch entries:", err);
                     setEntries([]);
                 } finally {
                     setLoadingEntries(false);
@@ -63,7 +66,8 @@ const JournalPage = () => {
             });
             setEditStates(prev => ({ ...prev, [entry._id]: false }));
         } catch (err) {
-            // Optionally show error
+            console.error("Failed to save entry:", err);
+            alert('Failed to save entry.');
         }
     };
 
@@ -76,7 +80,13 @@ const JournalPage = () => {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setEntries(prev => prev.filter(e => e._id !== entryId));
+            setEditStates(prev => {
+                const newState = { ...prev };
+                delete newState[entryId];
+                return newState;
+            });
         } catch (err) {
+            console.error("Failed to delete entry:", err);
             alert('Failed to delete entry.');
         }
     };
@@ -85,11 +95,14 @@ const JournalPage = () => {
     const handleAutoSummarize = async () => {
         setKeyInsightLoading(true);
         try {
-            // Replace with your local AI endpoint
-           const res = await axios.post('/api/ai/summarize', { text: journalText });
+            const token = localStorage.getItem("token");
+            const res = await axios.post('/api/ai/summarize', { text: journalText }, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
             setKeyInsight(res.data.summary);
         } catch (err) {
-            alert('Failed to summarize.');
+            console.error("Failed to summarize:", err);
+            alert('Failed to summarize. Please try again.');
         } finally {
             setKeyInsightLoading(false);
         }
@@ -124,9 +137,7 @@ const JournalPage = () => {
                     headers: { Authorization: `Bearer ${token}` }
                 }
             );
-            // Optionally show success message or redirect
             alert("Journal entry saved!");
-            // Clear form fields after successful save (optional)
             setJournalText("");
             setKeyInsight("");
             setEnergy([5]);
@@ -134,9 +145,8 @@ const JournalPage = () => {
             setSleep("7.5");
 
         } catch (err) {
-            // Handle error (show message)
+            console.error("Failed to save entry:", err);
             alert("Failed to save entry.");
-            console.error(err);
         }
     }
 
@@ -145,14 +155,14 @@ const JournalPage = () => {
             <JournalNavbar />
             {/* Floating Past Entries Button */}
             <button
-                className="fixed left-8 top-1/2 z-40 transform -translate-y-1/2 glass-card rounded-full p-4 shadow-xl border border-champagne/30 bg-white/60 backdrop-blur-lg hover:scale-105 transition"
+                className="fixed left-8 top-1/2 z-40 transform -translate-y-1/2 glass-card rounded-full p-4 shadow-xl border border-champagne/30 bg-white/60 backdrop-blur-lg hover:scale-105 transition-all duration-300 ease-out"
                 onClick={() => setShowEntries(true)}
                 title="Show Past Entries"
             >
-                <span className="text-2xl">📜</span>
+                 <span className="text-2xl">📜</span>
             </button>
 
-            {/* Overlay Modal for Past Entries */}
+            {/* Past Entries Modal Component */}
             <PastEntries
                 show={showEntries}
                 onClose={() => setShowEntries(false)}
@@ -172,22 +182,23 @@ const JournalPage = () => {
                 <div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-champagne/20 rounded-full filter blur-3xl opacity-50 animate-pulse" />
                 <div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blush-gold/20 rounded-full filter blur-3xl opacity-50 animate-pulse [animation-delay:-4s]" />
 
-                <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-start animate-fade-in-up">
-                    {/* Journal Input Column */}
-                    <div className="lg:col-span-2 w-full h-full">
+                {/* Main Content Grid - Adjusted for wider JournalInput */}
+                {/* Changed max-w-6xl to max-w-7xl for more overall width */}
+                <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8 items-start animate-fade-in-up">
+                    {/* Journal Input Column - Still takes 3 out of 4 columns, but now within a wider parent */}
+                    <div className="lg:col-span-3 w-full h-full">
                         <JournalInput value={journalText} onChange={(e) => setJournalText(e.target.value)} />
                     </div>
 
-                    {/* Metrics Column */}
+                    {/* Metrics Column - Still takes 1 out of 4 columns */}
                     <div className="w-full space-y-8">
-                        {/* REPLACED: <MoodRating value={mood} onValueChange={setMood} /> */}
                         <KeyInsightInput
                             value={keyInsight}
                             onChange={(e) => setKeyInsight(e.target.value)}
                             journalText={journalText}
                             onAutoSummarize={handleAutoSummarize}
                             loading={keyInsightLoading}
-                        /> {/* NEW: Key Insight Input */}
+                        />
                         <MetricSlider 
                             label="Energy" 
                             value={energy} 
@@ -198,7 +209,7 @@ const JournalPage = () => {
                         <SleepInput value={sleep} onChange={(e) => setSleep(e.target.value)} />
                         
                         {error && (
-                            <div className="text-red-600 font-semibold text-center mb-2">{error}</div>
+                            <div className="text-brand-crimson font-semibold text-center mb-2 text-sm font-sans">{error}</div>
                         )}
                         <Button 
                           onClick={handleSave}
